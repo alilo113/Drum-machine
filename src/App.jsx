@@ -7,8 +7,11 @@ import heater6 from "./audio/Heater-6.mp3";
 import cev from "./audio/Cev_H2.mp3";
 import kick from "./audio/Kick_n_Hat.mp3";
 import RP4 from "./audio/RP4_KICK_1.mp3";
+import { useState } from "react";
 
 function App() {
+  const [volume, setVolume] = useState(0)
+  
   const audioRefs = {
     heater1: useRef(null),
     heater2: useRef(null),
@@ -26,9 +29,14 @@ function App() {
     }
   };
 
+  function handleVolume() {
+    setVolume(volume + 1)
+    console.log(volume)
+  }
+  
   return (
     <div className="bg-gray-500 min-h-screen flex items-center justify-center">
-      <div className="bg-gray-400 border border-orange-300 p-3">
+      <div className="bg-gray-400 border border-orange-300 p-3 flex gap-6 flex-wrap m-3">
         <div className="grid grid-cols-3 gap-4">
           <div>
             <button onClick={() => playAudio('heater1')} className="bg-gray-500 p-10 rounded w-full">Q</button>
@@ -67,7 +75,10 @@ function App() {
             <audio ref={audioRefs.RP4} src={RP4}></audio>
           </div>
         </div>
-        <div></div>
+        <div>
+            <div className="bg-gray-500 p-3 text-center">fff</div>
+            <input type="range" onChange={handleVolume} className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-blue-700"/>
+          </div>
       </div>
     </div>
   );
